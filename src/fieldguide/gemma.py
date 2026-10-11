@@ -153,6 +153,18 @@ ROMAN_TAIL = re.compile(r"\s+(tree|plant|flower|ka ped|ki bel|ka phool|ka paudha
 
 
 BINOMIAL = re.compile(r"\b([A-Z][a-z]+ (?:× ?)?[a-z]+(?:-[a-z]+)?)\b")
+NOT_LATIN = {"the", "this", "it", "its", "a", "an", "is", "of", "scientific", "botanical", "binomial", "answer", "name", "plant", "common", "genus", "species"}
+
+
+def pick_binomial(reply: str) -> str | None:
+    """'Hibiscus rosa-sinensis' out of a reply like 'The binomial is **Hibiscus rosa-sinensis**.'"""
+    emphasised = re.findall(r"\*{1,2}([^*]+)\*{1,2}", reply)
+    for chunk in emphasised + [reply.replace("*", "")]:
+        for m in BINOMIAL.finditer(chunk):
+            words = m.group(1).lower().split()
+            if words[0] not in NOT_LATIN and words[-1] not in NOT_LATIN:
+                return m.group(1)
+    return None
 
 
 def botanical_name(local: str, english: str, model: str) -> str | None:
@@ -160,8 +172,7 @@ def botanical_name(local: str, english: str, model: str) -> str | None:
     the small model sometimes garbles a binomial it knows perfectly well."""
     named = f"{english} ({local})" if local else english
     reply = _chat(model, "You are a botanist.", f"What is the scientific name of the {named} plant? Reply with only the genus and species.", temperature=0.0)
-    m = BINOMIAL.search(reply.replace("*", ""))
-    return m.group(1) if m else None
+    return pick_binomial(reply)
 
 
 def questions(hindi: str, english: str, model: str) -> list[dict]:

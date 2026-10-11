@@ -23,5 +23,10 @@ dependencies = [
 requires = ["uv_build>=0.12.23,<0.13.0"]
 build-backend = "uv_build"
 
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
 [project.scripts]
 fieldguide = "fieldguide.cli:main"
