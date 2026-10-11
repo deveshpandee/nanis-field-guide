@@ -159,6 +159,25 @@ def read_recording(path: Path, override: datetime | None = None) -> Recording:
     return Recording(path, mtime - timedelta(seconds=duration), duration, "file mtime minus duration")
 
 
+def fix_start_times(recordings: list[Recording], photos: list[Photo]) -> list[str]:
+    """Some recorders stamp a file when it stops, not when it starts. If the photos fit
+    the recording much better shifted back by its own length, shift it. Returns notes."""
+    notes = []
+    for r in recordings:
+        if r.time_source == "walk.toml" or not r.duration:
+            continue
+
+        def inside(start: datetime) -> int:
+            end = start + timedelta(seconds=r.duration)
+            return sum(start <= p.taken_at <= end for p in photos)
+
+        earlier = r.started_at - timedelta(seconds=r.duration)
+        if inside(earlier) > max(inside(r.started_at), 0) * 1.5 + 1:
+            notes.append(f"{r.path.name}: its timestamp looks like the end of the recording; treating it as the end.")
+            r.started_at, r.time_source = earlier, r.time_source + " (was the end time)"
+    return notes
+
+
 def scan_walk(folder: Path, audio_start: datetime | None = None) -> tuple[list[Photo], list[Recording]]:
     photos, recordings = [], []
     for p in sorted(folder.iterdir()):
@@ -170,6 +189,8 @@ def scan_walk(folder: Path, audio_start: datetime | None = None) -> tuple[list[P
         elif ext in AUDIO_EXT:
             recordings.append(read_recording(p, audio_start if not recordings else None))
     photos.sort(key=lambda ph: ph.taken_at)
+    for note in fix_start_times(recordings, photos):
+        print(note)
     recordings.sort(key=lambda r: r.started_at)
     return photos, recordings
 

@@ -26,6 +26,18 @@ def test_stamp_from_name_local_and_pixel_utc():
     assert media.stamp_from_name("Voice 001.m4a") is None
 
 
+def test_recording_stamped_at_its_end_is_shifted_back():
+    rec = Recording(Path("Voice 001.m4a"), at(600), 600, "audio metadata")
+    notes = media.fix_start_times([rec], [photo(60), photo(200), photo(420)])
+    assert notes and rec.started_at == at(0)
+
+
+def test_recording_with_correct_start_is_left_alone():
+    rec = Recording(Path("Recording_20261011_171500.m4a"), at(0), 600, "filename")
+    assert media.fix_start_times([rec], [photo(60), photo(200), photo(420)]) == []
+    assert rec.started_at == at(0)
+
+
 def test_photos_close_in_time_are_one_stop():
     groups = align.group_photos([photo(30), photo(40), photo(128), photo(208)])
     assert [len(g) for g in groups] == [2, 1, 1]
