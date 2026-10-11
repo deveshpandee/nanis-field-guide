@@ -21,7 +21,7 @@ import httpx
 from .align import Stop
 from .media import load_image
 
-DEFAULT_MODEL = "gemma4:e2b-it-qat"
+DEFAULT_MODEL = "gemma4:e4b-it-qat"
 KIN = "नानी = Nani (mother's mother), नाना = Nana (mother's father), दादी = Dadi (father's mother), दादा = Dada (father's father), बेटा/बिटिया = dear child"
 
 
@@ -210,6 +210,9 @@ def write_entry(stop: Stop, elder: str = "Nani", model: str = DEFAULT_MODEL) -> 
     entry["quote_en"] = translate(hindi, model, elder) if hindi else ""
     if hindi:
         entry.update(notes(entry["quote_en"], hindi, elder, model))
+        memory = entry.get("memory", "").strip()
+        if len(memory) < 25 or memory.endswith(("...", "…")):
+            entry["memory"] = ""
         entry["family_remedy"] = bool(entry.get("family_remedy")) or bool(BODY_WORDS.search(hindi + " " + entry["quote_en"]))
         entry["ask_next_time"] = questions(hindi, entry["quote_en"], model)
     else:

@@ -1,0 +1,272 @@
+{
+ "model": "gemma4:e2b-it-qat",
+ "photo_only": 2,
+ "with_nani": 8,
+ "n": 12,
+ "rows": [
+  {
+   "hindi": "नीम",
+   "truth": "azadirachta indica",
+   "photo": {
+    "title": "File:Leaves Azadirachta indica Heritage tree Philippines.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Leaves_Azadirachta_indica_Heritage_tree_Philippines.jpg",
+    "license": "CC BY 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:P1898&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:P1898 (page does not exist)\">P1898</a>"
+   },
+   "photo_only": {
+    "english_name": "Unknown",
+    "scientific_name": "Unknown",
+    "confidence": "low"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Neem",
+    "scientific_name": "Azadirachta indica",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "पीपल",
+   "truth": "ficus religiosa",
+   "photo": {
+    "title": "File:Ficus religiosa peepal.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Ficus_religiosa_peepal.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Kiran.thumma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Kiran.thumma (page does not exist)\">Kiran.thumma</a>"
+   },
+   "photo_only": {
+    "english_name": "Fatsia japonica",
+    "scientific_name": "Fatsia japonica",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Butea monosperma",
+    "scientific_name": "Butea monosperma",
+    "confidence": "high"
+   },
+   "with_nani_ok": false
+  },
+  {
+   "hindi": "बरगद",
+   "truth": "ficus benghalensis",
+   "photo": {
+    "title": "File:Starr-080610-8178-Ficus benghalensis-aerial roots-Cable Company buildings Sand Island-Midway Atoll (24292030013).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Starr-080610-8178-Ficus_benghalensis-aerial_roots-Cable_Company_buildings_Sand_Island-Midway_Atoll_(24292030013).jpg",
+    "license": "CC BY 3.0 us",
+    "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/97499887@N06\">Forest and Kim Starr</a>"
+   },
+   "photo_only": {
+    "english_name": "Ficus",
+    "scientific_name": "Various species of Ficus (likely a Banyan or similar large fig tree)",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Banyan tree",
+    "scientific_name": "Ficus benghalensis",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "तुलसी",
+   "truth": "ocimum tenuiflorum",
+   "photo": {
+    "title": "File:Ocimum tenuiflorum 5725.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Ocimum_tenuiflorum_5725.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Vengolis\" title=\"User:Vengolis\">Vengolis</a>"
+   },
+   "photo_only": {
+    "english_name": "Unknown",
+    "scientific_name": "Unknown",
+    "confidence": "low"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Holy Basil",
+    "scientific_name": "Ocimum tenuiflorum",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "गुड़हल",
+   "truth": "hibiscus rosa-sinensis",
+   "photo": {
+    "title": "File:Chinese hibiscus (Hibiscus × rosa-sinensis) flower, Estufa Fria, Lisbon, Portugal julesvernex2.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Chinese_hibiscus_(Hibiscus_%C3%97_rosa-sinensis)_flower,_Estufa_Fria,_Lisbon,_Portugal_julesvernex2.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Julesvernex2\" title=\"User:Julesvernex2\">Jules Verne Times Two</a>"
+   },
+   "photo_only": {
+    "english_name": "Hibiscus",
+    "scientific_name": "Hibiscus rosa-sinensis",
+    "confidence": "high"
+   },
+   "photo_only_ok": true,
+   "with_nani": {
+    "english_name": "Hibiscus",
+    "scientific_name": "Hibiscus rosa-sinensis",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "आम",
+   "truth": "mangifera indica",
+   "photo": {
+    "title": "File:Oriental garden lizard (Calotes versicolor) in a mango tree in Laos.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Oriental_garden_lizard_(Calotes_versicolor)_in_a_mango_tree_in_Laos.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Basile_Morin\" title=\"User:Basile Morin\">Basile Morin</a>"
+   },
+   "photo_only": {
+    "english_name": "Ficus religiosa",
+    "scientific_name": "Ficus religiosa",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Mango",
+    "scientific_name": "Mangifera indica",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "अमरूद",
+   "truth": "psidium guajava",
+   "photo": {
+    "title": "File:Starr-130201-1657-Psidium guajava-fruit and leaves-Hawea Pl Olinda-Maui (25087039462).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Starr-130201-1657-Psidium_guajava-fruit_and_leaves-Hawea_Pl_Olinda-Maui_(25087039462).jpg",
+    "license": "CC BY 3.0 us",
+    "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/97499887@N06\">Forest and Kim Starr</a>"
+   },
+   "photo_only": {
+    "english_name": "Guava",
+    "scientific_name": "Psidium guajava",
+    "confidence": "high"
+   },
+   "photo_only_ok": true,
+   "with_nani": {
+    "english_name": "Guava",
+    "scientific_name": "Psidium guajava",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "करी पत्ता",
+   "truth": "murraya koenigii",
+   "photo": {
+    "title": "File:20260317 Murraya koenigii 02.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:20260317_Murraya_koenigii_02.jpg",
+    "license": "CC BY 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:FlocciNivis\" title=\"User:FlocciNivis\">Flocci Nivis</a>"
+   },
+   "photo_only": {
+    "english_name": "Fatsia japonica",
+    "scientific_name": "Fatsia japonica",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Curry Leaf Tree",
+    "scientific_name": "Murraya paniculata",
+    "confidence": "high"
+   },
+   "with_nani_ok": false
+  },
+  {
+   "hindi": "सदाबहार",
+   "truth": "catharanthus roseus",
+   "photo": {
+    "title": "File:Catharanthus roseus flower bud, Burdwan, West Bengal, India 12 09 2012.JPG",
+    "url": "https://commons.wikimedia.org/wiki/File:Catharanthus_roseus_flower_bud,_Burdwan,_West_Bengal,_India_12_09_2012.JPG",
+    "license": "CC BY-SA 3.0",
+    "artist": "<p><a href=\"//commons.wikimedia.org/wiki/User:JDP90\" class=\"mw-redirect\" title=\"User:JDP90\">Joydeep</a>\n</p>"
+   },
+   "photo_only": {
+    "english_name": "Rose",
+    "scientific_name": "Rosa spp.",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Periwinkle",
+    "scientific_name": "Vinca minor",
+    "confidence": "high"
+   },
+   "with_nani_ok": false
+  },
+  {
+   "hindi": "गेंदा",
+   "truth": "tagetes erecta",
+   "photo": {
+    "title": "File:Tagetes erecta Mallika3.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Tagetes_erecta_Mallika3.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Zuhairali\" title=\"User:Zuhairali\">Zuhairali</a>"
+   },
+   "photo_only": {
+    "english_name": "Yellow Gladiolus",
+    "scientific_name": "Gladiolus communis",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Marigold",
+    "scientific_name": "Tagetes spp.",
+    "confidence": "high"
+   },
+   "with_nani_ok": false
+  },
+  {
+   "hindi": "मेहंदी",
+   "truth": "lawsonia inermis",
+   "photo": {
+    "title": "File:Lawsonia inermis plant.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Lawsonia_inermis_plant.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:%E0%AE%9A%E0%AF%81.%E0%AE%AA%E0%AE%A4%E0%AF%8D%E0%AE%AE%E0%AE%BE\" title=\"User:சு.பத்மா\">சு.பத்மா</a>"
+   },
+   "photo_only": {
+    "english_name": "Ficus religiosa",
+    "scientific_name": "Ficus religiosa",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Henna",
+    "scientific_name": "Lawsonia inermis",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  },
+  {
+   "hindi": "अपराजिता",
+   "truth": "clitoria ternatea",
+   "photo": {
+    "title": "File:Clitoria ternatea.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Clitoria_ternatea.jpg",
+    "license": "CC0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Wilfredor\" class=\"mw-redirect\" title=\"User:Wilfredor\">Wilfredor</a>"
+   },
+   "photo_only": {
+    "english_name": "Blue Columbine",
+    "scientific_name": "Aquilegia caerulea",
+    "confidence": "high"
+   },
+   "photo_only_ok": false,
+   "with_nani": {
+    "english_name": "Clitoria ternatea",
+    "scientific_name": "Clitoria ternatea",
+    "confidence": "high"
+   },
+   "with_nani_ok": true
+  }
+ ]
+}

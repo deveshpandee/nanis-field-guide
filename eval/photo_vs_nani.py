@@ -21,7 +21,9 @@ import httpx
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from fieldguide.gemma import DEFAULT_MODEL, ollama_host  # noqa: E402
+from fieldguide.gemma import DEFAULT_MODEL, botanical_name, ollama_host  # noqa: E402
+
+MODEL = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_MODEL
 
 PLANTS = [
     # Hindi name as an elder would say it, accepted scientific names, Commons search
@@ -74,16 +76,27 @@ def ask(image: Path, said: str | None) -> dict:
         prompt = f"My grandmother pointed at this plant and said: \"{said}\". Identify the plant species."
     else:
         prompt = "Identify the plant species in this photo."
-    body = {"model": DEFAULT_MODEL, "stream": False, "think": False, "format": SCHEMA, "options": {"temperature": 0, "num_ctx": 4096},
+    body = {"model": MODEL, "stream": False, "think": False, "format": SCHEMA, "options": {"temperature": 0, "num_ctx": 4096},
             "messages": [{"role": "user", "content": prompt + " Reply as JSON.", "images": [b64]}]}
     r = httpx.post(f"{ollama_host()}/api/chat", json=body, timeout=300)
     r.raise_for_status()
     return json.loads(r.json()["message"]["content"])
 
 
+def _binomial(name: str) -> list[str]:
+    return name.lower().replace("×", "").replace("*", "").replace(" x ", " ").split()[:2]
+
+
 def correct(answer: str, accepted: list[str]) -> bool:
-    a = " ".join(answer.lower().replace("×", "").replace("x ", "").split()[:2])
-    return any(a == " ".join(acc.replace("×", "").split()[:2]) for acc in accepted)
+    return any(_binomial(answer) == _binomial(acc) for acc in accepted)
+
+
+def genus_ok(answer: str, accepted: list[str]) -> bool:
+    a = _binomial(answer)
+    return bool(a) and any(a[0] == _binomial(acc)[0] for acc in accepted)
+
+
+CONDITIONS = ["photo_only", "with_nani", "pipeline"]
 
 
 def main() -> None:
@@ -97,16 +110,23 @@ def main() -> None:
         t0 = time.time()
         a = ask(path, None)
         b = ask(path, f"ये {hi} है।")
-        row = {"hindi": hi, "truth": accepted[0], "photo": meta,
-               "photo_only": a, "photo_only_ok": correct(a["scientific_name"], accepted),
-               "with_nani": b, "with_nani_ok": correct(b["scientific_name"], accepted)}
+        # What fieldguide actually does: the same call, then a text-only name lookup.
+        looked_up = botanical_name(hi, b.get("english_name", ""), MODEL) if b.get("english_name") else None
+        c = {**b, "scientific_name": looked_up or b["scientific_name"]}
+        row = {"hindi": hi, "truth": accepted[0], "photo": meta}
+        for cond, ans in zip(CONDITIONS, [a, b, c]):
+            row[cond] = ans
+            row[cond + "_ok"] = correct(ans["scientific_name"], accepted)
+            row[cond + "_genus_ok"] = genus_ok(ans["scientific_name"], accepted)
         rows.append(row)
-        print(f"{hi:<10} {accepted[0]:<24} photo only: {a['scientific_name']:<28} {'✓' if row['photo_only_ok'] else '✗'}   "
-              f"with Nani: {b['scientific_name']:<26} {'✓' if row['with_nani_ok'] else '✗'}  ({time.time() - t0:.0f}s)")
+        marks = "   ".join(f"{cond}: {row[cond]['scientific_name'][:26]:<26} {'✓' if row[cond + '_ok'] else ('~' if row[cond + '_genus_ok'] else '✗')}" for cond in CONDITIONS)
+        print(f"{hi:<10} {accepted[0]:<24} {marks}  ({time.time() - t0:.0f}s)", flush=True)
     n = len(rows)
-    po, wn = sum(r["photo_only_ok"] for r in rows), sum(r["with_nani_ok"] for r in rows)
-    print(f"\n{DEFAULT_MODEL}: photo only {po}/{n}, photo + Nani's word {wn}/{n}")
-    (here / "results.json").write_text(json.dumps({"model": DEFAULT_MODEL, "photo_only": po, "with_nani": wn, "n": n, "rows": rows}, ensure_ascii=False, indent=1))
+    summary = {cond: {"species": sum(r[cond + "_ok"] for r in rows), "genus": sum(r[cond + "_genus_ok"] for r in rows)} for cond in CONDITIONS}
+    print(f"\n{MODEL} (n={n}, species / genus correct)")
+    for cond, s in summary.items():
+        print(f"  {cond:<11} {s['species']:2d}/{n}   {s['genus']:2d}/{n}")
+    (here / f"results-{MODEL.replace(":", "_")}.json").write_text(json.dumps({"model": MODEL, "n": n, "summary": summary, "rows": rows}, ensure_ascii=False, indent=1))
 
 
 if __name__ == "__main__":

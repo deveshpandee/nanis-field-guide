@@ -30,7 +30,7 @@ audio_start = ""               # "2026-10-11 17:15:03"
 language = "hi"
 vocabulary = ""                # extra names to prime Whisper with, e.g. "अपराजिता, सदाबहार"
 whisper_model = "large-v3-turbo"
-gemma_model = "gemma4:e2b-it-qat"
+gemma_model = "gemma4:e4b-it-qat"   # gemma4:e2b-it-qat is 2-3x faster, weaker at Hindi
 include_audio = true           # put each plant's clip in the booklet
 show_route = true              # draw the route from photo GPS (no map, no coordinates)
 """
@@ -113,6 +113,15 @@ def _stop_record(st: align.Stop, recs: list[media.Recording]) -> dict:
     }
 
 
+def _quote_clip(st: align.Stop, quote: str) -> list | None:
+    """The audio for a page: only the utterances that made it into the quote, not the chatter around them."""
+    keep = [h for h in st.heard if quote and gemma.grounded(h.text, quote) >= 0.5]
+    if not keep:
+        return list(st.clip) if st.clip else None
+    same = [h for h in keep if h.recording == keep[0].recording]
+    return [keep[0].recording, max(0.0, same[0].start - 0.4), same[-1].end + 0.4]
+
+
 def _stats(walk: Path, cfg: dict, recs, stops: list[dict], photos) -> dict:
     if recs:
         minutes = round(sum(r.duration for r in recs) / 60)
@@ -158,6 +167,7 @@ def cmd_process(a) -> None:
             dropped = f"  [{e['quote_dropped']} made-up sentence(s) dropped]" if e.get("quote_dropped") else ""
             print(f"  {e.get('local_name') or '?'} / {e.get('english_name')} ({e.get('scientific_name')}, {e.get('id_confidence')}){dropped}  {time.time() - t0:.0f}s")
             rec["edited"] = False
+        rec["clip"] = _quote_clip(st, rec["entry"].get("quote_hi", ""))
         records.append(rec)
         _save(state_path, recs, records, _stats(walk, cfg, recs, records, photos))
 
@@ -181,6 +191,15 @@ def cmd_render(a) -> None:
     print(f"Booklet: {out}")
 
 
+def cmd_video(a) -> None:
+    from .video import make_video
+
+    walk = Path(a.walk)
+    state = json.loads((walk / STATE).read_text())
+    out = make_video(walk, state, load_cfg(walk), walk / "booklet" / "walk.mp4")
+    print(f"Video: {out}")
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="fieldguide", description=__doc__)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -189,6 +208,7 @@ def main(argv: list[str] | None = None) -> None:
         ("check", cmd_check, "show how photos and speech line up, before asking Gemma"),
         ("process", cmd_process, "transcribe, write entries with Gemma, render the booklet"),
         ("render", cmd_render, "re-render the booklet after editing .fieldguide/entries.json"),
+        ("video", cmd_video, "make a short video of the booklet with each plant's audio (needs Chrome and pdftoppm)"),
     ]:
         p = sub.add_parser(name, help=helptext)
         p.add_argument("walk", help="folder with the walk's photos and recording")
