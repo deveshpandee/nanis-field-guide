@@ -1,7 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
-.claude/
 walks/
 out/
 *.egg-info/

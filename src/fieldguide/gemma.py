@@ -168,6 +168,18 @@ def pick_binomial(reply: str) -> str | None:
     return None
 
 
+def prefer_name(draft: str, looked_up: str | None) -> str:
+    """Take the text lookup only to repair the draft: when the draft is genus-only or
+    malformed, or the lookup keeps the genus and fixes the species. A lookup that
+    changes the genus is more likely the wrong look-alike, so the draft stands."""
+    if not looked_up:
+        return draft
+    d = pick_binomial(draft or "")
+    if not d or "spp" in draft.lower():
+        return looked_up
+    return looked_up if d.split()[0].lower() == looked_up.split()[0].lower() else draft
+
+
 def botanical_name(local: str, english: str, model: str) -> str | None:
     """Look the name up again as plain text. With a photo and a JSON schema in play,
     the small model sometimes garbles a binomial it knows perfectly well."""
@@ -213,9 +225,10 @@ def write_entry(stop: Stop, elder: str = "Nani", model: str = DEFAULT_MODEL) -> 
     entry["local_name"] = NAME_TAIL.sub("", entry.get("local_name", "").strip())
     entry["local_name_roman"] = ROMAN_TAIL.sub("", entry.get("local_name_roman", "").strip())
     if entry.get("english_name") and entry.get("id_confidence") != "low":
-        looked_up = botanical_name(entry["local_name"], entry["english_name"], model)
-        if looked_up and looked_up.lower() != entry.get("scientific_name", "").lower():
-            entry["scientific_name_draft"], entry["scientific_name"] = entry.get("scientific_name", ""), looked_up
+        draft = entry.get("scientific_name", "")
+        chosen = prefer_name(draft, botanical_name(entry["local_name"], entry["english_name"], model))
+        if chosen != draft:
+            entry["scientific_name_draft"], entry["scientific_name"] = draft, chosen
     entry["transcript_raw"] = raw
     entry["quote_hi"] = hindi
     entry["quote_dropped"] = dropped

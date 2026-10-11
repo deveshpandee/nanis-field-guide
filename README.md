@@ -78,9 +78,22 @@ E4B is noticeably better at Hindi: it fixes more misheard words and translates i
 
 ## Does the elder's word help?
 
-`eval/photo_vs_nani.py` asks Gemma for the species of 12 common Indian plants twice: from a Wikimedia Commons photo alone, and from the same photo plus the sentence a grandparent would say ("ये नीम है।").
+`eval/photo_vs_nani.py` asks Gemma for the species of 12 common Indian plants (neem, peepal, banyan, tulsi, gudhal, mango, guava, curry leaf, sadabahar, marigold, mehndi, aparajita) three ways, each with one Wikimedia Commons photo:
 
-<!-- eval results table -->
+1. **photo only**: "Identify the plant species in this photo."
+2. **photo + elder**: the same photo, plus what a grandparent says while pointing at it ("ये नीम है।")
+3. **pipeline**: what fieldguide does, i.e. (2) followed by a text-only lookup of the binomial
+
+Species correct, out of 12 (genus correct in brackets):
+
+| model | photo only | photo + elder | pipeline |
+|---|---|---|---|
+| Gemma 4 E2B | 2 (2) | 8 (10) | **10** (10) |
+<!-- e4b row -->
+
+The photo-only answers are mostly confident and wrong: mango came back as *Ficus religiosa*, aparajita as a columbine, marigold as a gladiolus. With the elder's word, E2B's remaining misses were peepal (*Butea monosperma*, misled by a red young leaf) and sadabahar (*Vinca minor*, the wrong periwinkle). Twelve photos is a small test, but the direction is not subtle.
+
+Run it yourself: `uv run python eval/photo_vs_nani.py gemma4:e4b-it-qat`.
 
 ## Privacy
 

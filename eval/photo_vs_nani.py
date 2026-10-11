@@ -21,7 +21,7 @@ import httpx
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from fieldguide.gemma import DEFAULT_MODEL, botanical_name, ollama_host  # noqa: E402
+from fieldguide.gemma import DEFAULT_MODEL, botanical_name, ollama_host, prefer_name  # noqa: E402
 
 MODEL = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_MODEL
 
@@ -112,7 +112,7 @@ def main() -> None:
         b = ask(path, f"ये {hi} है।")
         # What fieldguide actually does: the same call, then a text-only name lookup.
         looked_up = botanical_name(hi, b.get("english_name", ""), MODEL) if b.get("english_name") else None
-        c = {**b, "scientific_name": looked_up or b["scientific_name"]}
+        c = {**b, "scientific_name": prefer_name(b["scientific_name"], looked_up)}
         row = {"hindi": hi, "truth": accepted[0], "photo": meta}
         for cond, ans in zip(CONDITIONS, [a, b, c]):
             row[cond] = ans

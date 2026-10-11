@@ -70,6 +70,15 @@ def test_grounding_keeps_corrections_and_drops_inventions():
     assert "बुखार" not in kept and "दातुन" in kept
 
 
+def test_lookup_repairs_but_does_not_swap_genus():
+    assert gemma.prefer_name("Hibiscus rosa-hihibiscus", "Hibiscus rosa-sinensis") == "Hibiscus rosa-sinensis"
+    assert gemma.prefer_name("Murraya paniculata", "Murraya koenigii") == "Murraya koenigii"
+    assert gemma.prefer_name("Tagetes spp.", "Tagetes erecta") == "Tagetes erecta"
+    assert gemma.prefer_name("Hibiscus", "Hibiscus rosa-sinensis") == "Hibiscus rosa-sinensis"
+    assert gemma.prefer_name("Catharanthus roseus", "Vinca minor") == "Catharanthus roseus"
+    assert gemma.prefer_name("Azadirachta indica", None) == "Azadirachta indica"
+
+
 def test_binomial_lookup_parsing():
     assert gemma.pick_binomial("Hibiscus rosa-sinensis") == "Hibiscus rosa-sinensis"
     assert gemma.pick_binomial("The binomial scientific name for gudhal is **Hibiscus rosa-sinensis**.") == "Hibiscus rosa-sinensis"
