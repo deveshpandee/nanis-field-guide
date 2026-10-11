@@ -12,7 +12,7 @@
   },
   "pipeline": {
    "species": 11,
-   "genus": 11
+   "genus": 12
   }
  },
  "rows": [
@@ -119,8 +119,8 @@
     "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Vengolis\" title=\"User:Vengolis\">Vengolis</a>"
    },
    "photo_only": {
-    "english_name": "Moss-covered tree sapling or seedling",
-    "scientific_name": "Uncertain (requires more information for precise identification)",
+    "english_name": "Unknown",
+    "scientific_name": "Unknown",
     "confidence": "low"
    },
    "photo_only_ok": false,
@@ -289,11 +289,11 @@
    "with_nani_genus_ok": true,
    "pipeline": {
     "english_name": "Periwinkle",
-    "scientific_name": "Vinca minor",
+    "scientific_name": "Catharanthus roseus",
     "confidence": "high"
    },
-   "pipeline_ok": false,
-   "pipeline_genus_ok": false
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "गेंदा",
@@ -382,10 +382,10 @@
    "with_nani_genus_ok": true,
    "pipeline": {
     "english_name": "Butterfly Pea",
-    "scientific_name": "Clitoria ternatea",
+    "scientific_name": "Clitoria ternate",
     "confidence": "high"
    },
-   "pipeline_ok": true,
+   "pipeline_ok": false,
    "pipeline_genus_ok": true
   }
  ]

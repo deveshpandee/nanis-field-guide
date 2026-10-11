@@ -89,7 +89,9 @@ Species correct, out of 12 (genus correct in brackets):
 | model | photo only | photo + elder | pipeline |
 |---|---|---|---|
 | Gemma 4 E2B | 2 (2) | 8 (10) | **10** (10) |
-<!-- e4b row -->
+| Gemma 4 E4B | 2 (3) | 10 (12) | **11** (12) |
+
+The lookup is only allowed to repair a draft: genus-only answers ("Tagetes spp." → *Tagetes erecta*) and same-genus fixes (*Murraya paniculata* → *Murraya koenigii*). A lookup that changes the genus is ignored, because it tends to pick the wrong look-alike (*Vinca minor* for sadabahar). E4B's one pipeline miss is a truncated epithet ("Clitoria ternate").
 
 The photo-only answers are mostly confident and wrong: mango came back as *Ficus religiosa*, aparajita as a columbine, marigold as a gladiolus. With the elder's word, E2B's remaining misses were peepal (*Butea monosperma*, misled by a red young leaf) and sadabahar (*Vinca minor*, the wrong periwinkle). Twelve photos is a small test, but the direction is not subtle.
 
