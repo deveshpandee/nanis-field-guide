@@ -1,13 +1,14 @@
 [project]
 name = "fieldguide"
 version = "0.1.0"
-description = "Add your description here"
+description = "Walk with an elder, record what they know about the plants, and get a bilingual family field guide. Runs offline with Whisper and Gemma."
 readme = "README.md"
 authors = [
     { name = "deveshPandey", email = "devesh2051@gmail.com" }
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "av>=16,<17",
     "fastapi>=0.143.0",
     "faster-whisper>=1.2.1",
     "httpx>=0.28.1",
@@ -20,3 +21,6 @@ dependencies = [
 [build-system]
 requires = ["uv_build>=0.12.23,<0.13.0"]
 build-backend = "uv_build"
+
+[project.scripts]
+fieldguide = "fieldguide.cli:main"

@@ -5,3 +5,4 @@ __pycache__/
 walks/
 out/
 *.egg-info/
+eval/images/
