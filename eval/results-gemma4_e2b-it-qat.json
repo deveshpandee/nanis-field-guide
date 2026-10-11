@@ -1,8 +1,20 @@
 {
  "model": "gemma4:e2b-it-qat",
- "photo_only": 2,
- "with_nani": 8,
  "n": 12,
+ "summary": {
+  "photo_only": {
+   "species": 2,
+   "genus": 2
+  },
+  "with_nani": {
+   "species": 8,
+   "genus": 10
+  },
+  "pipeline": {
+   "species": 10,
+   "genus": 10
+  }
+ },
  "rows": [
   {
    "hindi": "नीम",
@@ -19,12 +31,21 @@
     "confidence": "low"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Neem",
     "scientific_name": "Azadirachta indica",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Neem",
+    "scientific_name": "Azadirachta indica",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "पीपल",
@@ -41,12 +62,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Butea monosperma",
     "scientific_name": "Butea monosperma",
     "confidence": "high"
    },
-   "with_nani_ok": false
+   "with_nani_ok": false,
+   "with_nani_genus_ok": false,
+   "pipeline": {
+    "english_name": "Butea monosperma",
+    "scientific_name": "Butea monosperma",
+    "confidence": "high"
+   },
+   "pipeline_ok": false,
+   "pipeline_genus_ok": false
   },
   {
    "hindi": "बरगद",
@@ -63,12 +93,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Banyan tree",
     "scientific_name": "Ficus benghalensis",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Banyan tree",
+    "scientific_name": "Ficus benghalensis",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "तुलसी",
@@ -85,12 +124,21 @@
     "confidence": "low"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Holy Basil",
     "scientific_name": "Ocimum tenuiflorum",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Holy Basil",
+    "scientific_name": "Ocimum tenuiflorum",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "गुड़हल",
@@ -107,12 +155,21 @@
     "confidence": "high"
    },
    "photo_only_ok": true,
+   "photo_only_genus_ok": true,
    "with_nani": {
     "english_name": "Hibiscus",
     "scientific_name": "Hibiscus rosa-sinensis",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Hibiscus",
+    "scientific_name": "Hibiscus rosa-sinensis",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "आम",
@@ -129,12 +186,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Mango",
     "scientific_name": "Mangifera indica",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Mango",
+    "scientific_name": "Mangifera indica",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "अमरूद",
@@ -151,12 +217,21 @@
     "confidence": "high"
    },
    "photo_only_ok": true,
+   "photo_only_genus_ok": true,
    "with_nani": {
     "english_name": "Guava",
     "scientific_name": "Psidium guajava",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Guava",
+    "scientific_name": "Psidium guajava",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "करी पत्ता",
@@ -173,12 +248,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Curry Leaf Tree",
     "scientific_name": "Murraya paniculata",
     "confidence": "high"
    },
-   "with_nani_ok": false
+   "with_nani_ok": false,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Curry Leaf Tree",
+    "scientific_name": "Murraya koenigii",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "सदाबहार",
@@ -195,12 +279,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Periwinkle",
     "scientific_name": "Vinca minor",
     "confidence": "high"
    },
-   "with_nani_ok": false
+   "with_nani_ok": false,
+   "with_nani_genus_ok": false,
+   "pipeline": {
+    "english_name": "Periwinkle",
+    "scientific_name": "Vinca minor",
+    "confidence": "high"
+   },
+   "pipeline_ok": false,
+   "pipeline_genus_ok": false
   },
   {
    "hindi": "गेंदा",
@@ -217,12 +310,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Marigold",
     "scientific_name": "Tagetes spp.",
     "confidence": "high"
    },
-   "with_nani_ok": false
+   "with_nani_ok": false,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Marigold",
+    "scientific_name": "Tagetes erecta",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "मेहंदी",
@@ -239,12 +341,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Henna",
     "scientific_name": "Lawsonia inermis",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Henna",
+    "scientific_name": "Lawsonia inermis",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   },
   {
    "hindi": "अपराजिता",
@@ -261,12 +372,21 @@
     "confidence": "high"
    },
    "photo_only_ok": false,
+   "photo_only_genus_ok": false,
    "with_nani": {
     "english_name": "Clitoria ternatea",
     "scientific_name": "Clitoria ternatea",
     "confidence": "high"
    },
-   "with_nani_ok": true
+   "with_nani_ok": true,
+   "with_nani_genus_ok": true,
+   "pipeline": {
+    "english_name": "Clitoria ternatea",
+    "scientific_name": "Clitoria ternatea",
+    "confidence": "high"
+   },
+   "pipeline_ok": true,
+   "pipeline_genus_ok": true
   }
  ]
 }
