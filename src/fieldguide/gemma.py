@@ -2,9 +2,10 @@
 
 The elder is the authority. Gemma files what they said, puts a botanical name
 next to it, and translates. Small models do better with small jobs, so an entry
-is four short calls: clean the transcript, translate it, identify the plant,
-pull out what was taught. Every sentence Gemma keeps is checked against the
-recording's transcript, so nothing is put in the elder's mouth.
+is a handful of short calls: clean the transcript, identify the plant (and look its
+binomial up again as text), translate, pull out what was taught, suggest questions.
+Every sentence Gemma keeps is checked against the recording's transcript, so
+nothing is put in the elder's mouth.
 """
 
 from __future__ import annotations
@@ -83,7 +84,7 @@ def keep_grounded(cleaned: str, transcript: str, threshold: float = 0.6) -> tupl
     return " ".join(kept), dropped
 
 
-# --- the four small jobs ----------------------------------------------------
+# --- the small jobs ---------------------------------------------------------
 
 CLEAN = """You correct automatic Hindi speech transcripts recorded on a walk with a grandparent.
 1. Fix words the speech recognizer misheard, using the context of plants and village life (for example अमरुत → अमरूद, पत्ति → पत्ती, करते ते → करते थे).
@@ -185,7 +186,7 @@ def clean(transcript: str, model: str) -> str:
     return _chat(model, CLEAN, transcript, temperature=0.1)
 
 
-def translate(hindi: str, model: str = DEFAULT_MODEL, elder: str = "Nani") -> str:
+def translate(hindi: str, model: str = DEFAULT_MODEL) -> str:
     return _chat(model, TRANSLATE, hindi, temperature=0.1)
 
 
@@ -218,7 +219,7 @@ def write_entry(stop: Stop, elder: str = "Nani", model: str = DEFAULT_MODEL) -> 
     entry["transcript_raw"] = raw
     entry["quote_hi"] = hindi
     entry["quote_dropped"] = dropped
-    entry["quote_en"] = translate(hindi, model, elder) if hindi else ""
+    entry["quote_en"] = translate(hindi, model) if hindi else ""
     if hindi:
         entry.update(notes(entry["quote_en"], hindi, elder, model))
         memory = entry.get("memory", "").strip()
